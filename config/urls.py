@@ -5,7 +5,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from configapp.views.all_view import StudentApi, UserApi
+from configapp.views.all_view import StudentApi, UserApi, TeacherAndUser
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -27,5 +27,6 @@ urlpatterns = [
     path('student/', StudentApi.as_view()),
     path('user/',UserApi.as_view()),
     path('students/<int:pk>/', StudentApi.as_view()),
+    path('teacher/',TeacherAndUser.as_view()),
 
 ]
