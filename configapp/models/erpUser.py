@@ -39,6 +39,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     objects = CustomUserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

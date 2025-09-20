@@ -10,12 +10,12 @@ class UserSerializer(serializers.ModelSerializer):
     # is_teacher=serializers.BooleanField(read_only=True)
     # is_admin=serializers.BooleanField(read_only=True)
     # is_student=serializers.BooleanField(read_only=True)
-    is_staff=serializers.BooleanField(read_only=True)
+    # is_staff=serializers.BooleanField(read_only=True)
     class Meta:
         model=User
 
         fields = ['phonenumber', 'password', 'email', 'is_staff','is_teacher', 'is_student', 'is_admin','is_active']
-        read_only_fields = ['sms_kod']
+        read_only_fields = ['sms_kod','is_admin','is_staff']
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model=Teacher

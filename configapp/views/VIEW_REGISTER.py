@@ -39,10 +39,12 @@ class VerifyApi(APIView):
         verify_kod = serializer.validated_data['verify_kod']
         cache_cod = str(cache.get(email))
         if verify_kod == cache_cod:
+            cache.set(f"{email}_verified", True, timeout=600)
             return Response({
                 'status': True,
                 'detail': 'OTP matched'
             })
+
         else:
             return Response({
                 'status': False,
