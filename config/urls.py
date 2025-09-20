@@ -5,7 +5,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from configapp.views.all_view import StudentApi, UserApi, TeacherAndUser
+from configapp.views import VerifyApi, RegisterApi, SendEmailAPI
+from configapp.views.all_view import StudentApi, UserApi, TeacherAndUser, SendEmail
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -25,8 +26,12 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('student/', StudentApi.as_view()),
+    path('send_email',SendEmail.as_view()),
     path('user/',UserApi.as_view()),
     path('students/<int:pk>/', StudentApi.as_view()),
     path('teacher/',TeacherAndUser.as_view()),
+    path('send_sms/',SendEmailAPI.as_view()),
+    path('verify/',VerifyApi.as_view()),
+    path('register/',RegisterApi.as_view()),
 
 ]

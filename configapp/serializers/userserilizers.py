@@ -6,10 +6,10 @@ from configapp.models.teacher import Teacher
 
 
 class UserSerializer(serializers.ModelSerializer):
-    is_active=serializers.BooleanField(read_only=True)
-    is_teacher=serializers.BooleanField(read_only=True)
-    is_admin=serializers.BooleanField(read_only=True)
-    is_student=serializers.BooleanField(read_only=True)
+    # is_active=serializers.BooleanField(read_only=True)
+    # is_teacher=serializers.BooleanField(read_only=True)
+    # is_admin=serializers.BooleanField(read_only=True)
+    # is_student=serializers.BooleanField(read_only=True)
     is_staff=serializers.BooleanField(read_only=True)
     class Meta:
         model=User
@@ -30,6 +30,12 @@ class StudentSerializer(serializers.ModelSerializer):
 class TeacherPostSerializer(serializers.Serializer):
     teacher=TeacherSerializer()
     user=UserSerializer()
+
+class EmailSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+class VerifySerializer(serializers.Serializer):
+    email=serializers.EmailField()
+    verify_kod=serializers.CharField()
 
 
 

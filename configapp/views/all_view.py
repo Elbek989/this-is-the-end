@@ -1,4 +1,7 @@
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
+from pyexpat.errors import messages
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -81,3 +84,16 @@ class TeacherAndUser(APIView):
             "user": user_serializer.data,
             "teacher": teacher_serializer.data
         }, status=status.HTTP_201_CREATED)
+
+class SendEmail(APIView):
+    @swagger_auto_schema(request_body=EmailSerializer)
+    def post(self, request):
+        subject = 'Hi ,Whats up'
+        message = request.data['text']
+        email = request.data['email']
+        email_from = settings.EMAIL_HOST_USER
+
+        # send_mail (subject, message, from_email, recipient_list)
+        send_mail(subject, message, email_from, [email])
+
+        return Response(data={f"{email}": "Email sent successfully"})

@@ -3,23 +3,29 @@ from django.contrib.auth.models import PermissionsMixin
 from django.core.validators import RegexValidator
 from django.db import models
 class CustomUserManager(BaseUserManager):
-    def create_user(self, phonenumber, password=None, **extra_fields):
-        if not phonenumber:
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
             raise ValueError('raqam kiritish shart')
-        user = self.model(phonenumber=phonenumber, **extra_fields)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phonenumber, password, **extra_fields):
+    def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_admin', True)
         extra_fields.setdefault('is_staff', True)
         if extra_fields.get('is_admin') is not True:
             raise ValueError('Superuser admin bo‘lishi kerak')
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser staff bo‘lishi kerak')
-        return self.create_user(phonenumber, password, **extra_fields)
+        return self.create_user(email, password, **extra_fields)
 
+class BaseModel(models.Model):
+    created_ed = models.DateField(auto_now_add=True)
+    updated_ed = models.DateField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
 class User(AbstractBaseUser,PermissionsMixin):
     phone_regex = RegexValidator(
@@ -34,7 +40,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_student = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     objects = CustomUserManager()
-    USERNAME_FIELD = 'phone_number'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     def __str__(self):
 
