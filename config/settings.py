@@ -122,6 +122,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -134,3 +135,18 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'r99630904@gmail.com'
 EMAIL_HOST_PASSWORD = 'pwtf nejv yabh cssr'
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic',
+            'description': 'Basic authentication: username & password kiriting',
+        },
+        'Bearer': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization',
+            'description': 'JWT authentication. Format: Bearer <token>',
+        },
+    },
+    'USE_SESSION_AUTH': False,
+}

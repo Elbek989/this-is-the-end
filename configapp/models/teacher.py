@@ -13,6 +13,7 @@ class Departments(BaseModel):
         return self.title
 
 class Course(BaseModel):
+    objects = None
     title = models.CharField()
     descriptions = models.TextField(blank=True,null=True)
 
