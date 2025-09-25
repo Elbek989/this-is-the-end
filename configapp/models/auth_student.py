@@ -1,4 +1,4 @@
-from .erpUser import *
+from .auth_user import *
 from .model_group import *
 
 class Student(BaseModel):

@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from . import BaseModel
-from .erpUser import *
+
+from .auth_user import *
 
 class Departments(BaseModel):
     title = models.CharField(max_length=50)

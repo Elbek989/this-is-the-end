@@ -1,38 +1,36 @@
-from .student import *
-from .erpUser import *
-from .teacher import *
+from .auth_student import *
+from .auth_user import *
+from .auth_teacher import *
 class Day(BaseModel):
     title = models.CharField(max_length=50)
     descriptions = models.CharField(max_length=500,blank=True,null=True)
 
-    def str(self):
+    def __str__(self):
         return self.title
 
 class Rooms(BaseModel):
     title = models.CharField(max_length=50)
     descriptions = models.CharField(max_length=500,blank=True,null=True)
 
-    def str(self):
+    def __str__(self):
         return self.title
 
 class TableType(BaseModel):
     title = models.CharField()
     descriptions = models.CharField(max_length=500,blank=True,null=True)
 
-    def str(self):
+    def __str__(self):
         return self.title
 
-
-
 class Table(BaseModel):
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     room = models.ForeignKey(Rooms,on_delete=models.RESTRICT)
     type = models.ForeignKey(TableType,on_delete=models.RESTRICT)
     descriptions = models.TextField(blank=True,null=True)
 
-    def str(self):
-        return self.start_time.str() + " " + self.end_time.str()
+    def __str__(self):
+        return self.start_time.__str__() + " " + self.end_time.__str__()
 
 class GroupStudent(BaseModel):
     title = models.CharField()
@@ -45,5 +43,5 @@ class GroupStudent(BaseModel):
     end_time = models.DateField()
     descriptions = models.CharField(blank=True,null=True)
 
-    def str(self):
+    def __str__(self):
         return self.title
